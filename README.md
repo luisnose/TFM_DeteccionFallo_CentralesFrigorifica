@@ -1,4 +1,4 @@
-# Mercadona (Mantenimiento Evaporador para muebles frigorificos)
+# Mercadona (Mantenimiento Evaporador para Muebles Frigorificos)
 
 
 ![Logo](Images/mercadona_logo.png)
