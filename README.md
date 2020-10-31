@@ -32,6 +32,7 @@ Prueba de Concepto (POC) para viabilidad de un mantenimiento predictivo con hist
 Se utilizo Google Cloud Platform:
 
 ![Jupiter](Images/GCP.png)
+![Jupiter](Images/GCP2.png)
 
 BigQuery y Google Cloud Storage -> Almacenamiento de datos
 
