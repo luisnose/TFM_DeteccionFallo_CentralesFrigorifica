@@ -52,3 +52,21 @@ AI Platform (Júpiter Notebooks)-> Procesamiento, Análisis y limpieza de los da
 
 
 
+
+
+
+
+## Authors
+- Luis Araujo
+- Miguel Ángel Aguilar
+- Rocío Cort
+- Victor Malvar
+
+
+
+
+
+
+
+
+
