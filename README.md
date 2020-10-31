@@ -30,6 +30,7 @@ Prueba de Concepto (POC) para viabilidad de un mantenimiento predictivo con hist
 ## Arquitectura <a name="Arquitectura"></a>
 
 Se utilizo Google Cloud Platform:
+
 <img src="./Images/GCP.png" width="50%"><br/>
 
 ![Jupiter](Images/GCP2.png)
