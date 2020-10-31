@@ -35,8 +35,8 @@ BigQuery y Google Cloud Storage -> Almacenamiento de datos
 
 AI Platform (Júpiter Notebooks)-> Procesamiento, Análisis y limpieza de los datos
 
-<img src="./Images/jupiter.png" width="25%"><br/>
+<img src="./Images/jupiterNotebook.png" width="25%"><br/>
 
-![Jupiter](Images/jupiter.png)
+![Jupiter](Images/jupiterNotebook.png)
 
 
