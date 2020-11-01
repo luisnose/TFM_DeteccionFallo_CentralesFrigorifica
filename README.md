@@ -19,9 +19,9 @@ TFM Mercadona: Detecccion de fallos en muebles frigorificos
 
 Prescribir la arquitectura que permita el tratamiento de más de 3 TB de datos. 
 
-Descripción de Variables obtenidas de un mueble frigorífico y central de frio.
+Descripción de variables obtenidas de un mueble frigorífico y central de frio.
 
-Prueba de Concepto (POC) para viabilidad de un mantenimiento predictivo con histórico de 2 años.
+Comparación de modelos para comprobar la viabilidad de un mantenimiento predictivo con histórico de 2 años.
 
 
 ## Arquitectura <a name="Arquitectura"></a>
