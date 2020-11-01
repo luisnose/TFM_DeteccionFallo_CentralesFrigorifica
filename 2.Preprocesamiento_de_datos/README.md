@@ -21,20 +21,20 @@ Utilizamos la base de datos de las alarmas y filtramos de la siguien
     * No pueden haber estado inhabilitadas antes de su activación. sino la misma debería ser considerada como mantenimiento preventivo.
 
 **Alarma Critica**
-| Field name|TimeStand|TYPE|    
+|   |TimeStand|TYPE|    
 | ----------|-------|-------|
 | Example      |1|EnabledNotif |
 | Example      |2|InhibitNotif|
-| Example      |3|**EnabledNotif**|
+|**Example**     |**3**|**EnabledNotif**|
 | Example      |4|Being  |
 | Example      |5|End  |
 
 **Alarma Desabilitada antes de su inicio**
-| Field name|TimeStand|TYPE|    
+|   |TimeStand|TYPE|    
 | ----------|-------|-------|
 | Example      |1|EnabledNotif |
 | Example      |2|EnabledNotif|
-| Example      |3|**InhibitNotif**|
+| **Example**    |**3** |**InhibitNotif**|
 | Example      |4|Being  |
 | Example      |5|End  |
 
