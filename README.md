@@ -41,9 +41,7 @@ Se utilizo Google Cloud Platform:
 Se utilizaron 5 bases de datos:
 
 1. Alarmas
-
-2. Telemetría de muebles frigoríficos
-
+2. Telemetría de muebles frigoríficos
 3. Telemetría de central de frío
 4. Base de datos relacionales Zonas, centros, Tiendas y elementos
 5. Base de datos relacionales de Tiendas y sus coordenadas
@@ -91,6 +89,18 @@ Identificador de tiendas, altitud, longitud y altura con respecto al mar
 | Type      |FLOAT  |FLOAT     |  FLOAT |INTEGER |
 
 ## librerias utilizadas <a name="software"></a>
+
+
+* **python version 3.7 ** 
+* **Pandas** : librería Python para Dataframes análisis
+* **Numpy** : El paquete fundamental para la informática científica con Python
+* **sklearn** : Scikit-learn es una biblioteca para aprendizaje automático de software libre
+* **google** : Biblioteca de cliente de Cloud Storage para Python
+* **matplotlib** : Biblioteca para la generación de gráficos a partir de datos contenidos en listas o arrays 
+* **seaborn** : Biblioteca de visualización de datos de Python basada en matplotlib
+* **dateutil** : Biblioteca para analisis de series temporales
+
+
 
 
 
