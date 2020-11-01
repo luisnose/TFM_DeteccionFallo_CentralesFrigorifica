@@ -26,13 +26,13 @@ Comparación de modelos para comprobar la viabilidad de un mantenimient
 
 ## Arquitectura <a name="Arquitectura"></a>
 
-Se utilizo **SAP** Data Services para la extraccion de datos
+Se utilizo **SAP Data Services** para la extraccion de datos
 
 ![Jupiter](Images/GCP2.png)
 
 
 
-Se utilizo Google Cloud Platform para almacenamiento y analitica de datos:
+Se utilizo **Google Cloud Platform** para almacenamiento y analitica de datos:
 
 <img src="./Images/GCP.png" width="75%"><br/>
 
