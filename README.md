@@ -103,10 +103,10 @@ Identificador de tiendas, altitud, longitud y altura con respecto al mar
 
 ## Notebooks utilizados <a name="Notebooks"></a>
 
-    1. [Descripción de Variables](#paginadescripcion)
-    2. Preprocesamiento de datos (Data Cleaning)
-    3. Clusterización
-    4. Comparación de Modelos 
+1. [Descripción de Variables](#paginadescripcion)
+2. Preprocesamiento de datos (Data Cleaning)
+3. Clusterización
+4. Comparación de Modelos 
 
 
 
