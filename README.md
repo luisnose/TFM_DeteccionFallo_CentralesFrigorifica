@@ -39,13 +39,13 @@ Se utilizo **Google Cloud Platform** para almacenamiento y analitica de datos:
 ## Base de datos utilizadas <a name="datasets"></a>
 
 
-Se utilizaron 5 bases de datos:
+Se utilizaron 5 tablas de datos:
 
     1. Historico de alarmas
     2. Telemetría de muebles frigoríficos
     3. Telemetría de central de frío
-    4. Base de datos relacionales Zonas, centros, Tiendas y elementos
-    5. Base de datos relacionales de Tiendas y sus coordenadas
+    4. Datos relacionales Zonas, centros, Tiendas y elementos
+    5. Datos relacionales de Tiendas y sus coordenadas
 
 1. PIC_TRACK_ALARM_ENRICH :
 Base de datos de alarmas de todos los centros
