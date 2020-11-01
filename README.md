@@ -37,9 +37,10 @@ Se utilizo Google Cloud Platform:
 
 ## Base de datos utilizadas <a name="datasets"></a>
 
+
 Se utilizaron 5 bases de datos:
 
-    1. Alarmas
+    1. Historico de alarmas
     2. Telemetría de muebles frigoríficos
     3. Telemetría de central de frío
     4. Base de datos relacionales Zonas, centros, Tiendas y elementos
@@ -102,10 +103,13 @@ Identificador de tiendas, altitud, longitud y altura con respecto al mar
 
 ## Notebooks utilizados <a name="Notebooks"></a>
 
-    1. Descripción de Variables 
+    1. [Descripción de Variables](#paginadescripcion)
     2. Preprocesamiento de datos (Data Cleaning)
     3. Clusterización
     4. Comparación de Modelos 
+
+
+
 
 1. Descripción de Variables 
 
