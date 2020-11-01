@@ -14,11 +14,10 @@ TFM Mercadona: Detecccion de fallos en muebles frigorificos
 2. [Arquitectura](#Arquitectura)
 3. [Base de datos](#datasets)
 4. [librerias utilizadas](#software)
-    1. [Lista de Open Datasets](#opendata)
-    2. [Datasets Propios](#customdata)
-5. [Resultados](#resultados)
+5. [Notebooks utilizados](#Notebooks)
 
 ## Objetivo del proyecto <a name="Objetivo"></a>
+
 
 Prescribir la arquitectura que permita el tratamiento de más de 3 TB de datos. 
 
@@ -99,6 +98,26 @@ Identificador de tiendas, altitud, longitud y altura con respecto al mar
 * **matplotlib** : Biblioteca para la generación de gráficos a partir de datos contenidos en listas o arrays 
 * **seaborn** : Biblioteca de visualización de datos de Python basada en matplotlib
 * **dateutil** : Biblioteca para analisis de series temporales
+
+
+## Notebooks utilizados <a name="Notebooks"></a>
+
+    1. Descripción de Variables 
+    2. Preprocesamiento de datos (Data Cleaning)
+    3. Clusterización
+    4. Comparación de Modelos 
+
+1. Descripción de Variables 
+
+Notebook utilizacion para la descriopccion de la telemetria optenida de los muebles frigorificos y murales de frio.
+
+Identifiamos:
+Outliers
+Sensores descalibrados
+Variables sin información
+Variables dependientes
+
+<img src="./Images/Descripcion.png" width="75%"><br/>
 
 
 
