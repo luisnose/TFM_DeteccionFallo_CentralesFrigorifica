@@ -10,7 +10,7 @@ Procedemos a generar un dataset el cual será utilizado para el entre
 
 Utilizamos la base de datos de las alarmas y filtramos de la siguiente manera:
 
-<img src="./Images/df_alarm.png" width="100%"><br/>
+<img src=".././Images/df_alarm.png" width="100%"><br/>
 * filtramos las alarmas que habían sido generadas por murales de carne y murales de pescados ambos con controladores RX600.  
 
 | Field name|DESCRIPTION|  
