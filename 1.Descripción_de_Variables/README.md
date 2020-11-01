@@ -1,7 +1,7 @@
 TFM Mercadona: Detecccion de fallos en muebles frigorificos
 
+<img src="../Images/mercadona_logo.png" width="40%"><br/>
 
-![Logo](../Images/mercadona_logo.png)
 
 
 1. Descripción de Variables 
