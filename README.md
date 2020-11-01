@@ -21,17 +21,20 @@ Prescribir la arquitectura que permita el tratamiento de más de 3 TB
 
 Descripción de variables obtenidas de un mueble frigorífico y central de frio.
 
-Comparación de modelos para comprobar la viabilidad de un mantenimiento predictivo con histórico de 2 años.
+Comparación de modelos para comprobar la viabilidad de un mantenimiento predictivo con histórico de 1.5 años.
 
 
 ## Arquitectura <a name="Arquitectura"></a>
 
-Se utilizo Google Cloud Platform:
-
-<img src="./Images/GCP.png" width="75%"><br/>
+Se utilizo **SAP** Data Services para la extraccion de datos
 
 ![Jupiter](Images/GCP2.png)
 
+
+
+Se utilizo Google Cloud Platform para almacenamiento y analitica de datos:
+
+<img src="./Images/GCP.png" width="75%"><br/>
 
 ## Base de datos utilizadas <a name="datasets"></a>
 
