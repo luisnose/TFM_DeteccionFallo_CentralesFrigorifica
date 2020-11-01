@@ -104,9 +104,8 @@ Identificador de tiendas, altitud, longitud y altura con respecto al mar
 ## Notebooks utilizados <a name="Notebooks"></a>
 
 1. [Descripción de Variables](1.Descripción_de_Variables/)
-2. [Preprocesamiento de datos (Data Cleaning)](2.Preprocesamiento_de_datos/README.md#Preprocesamientodeldatos)
-3. [Clusterización](2.Preprocesamiento_de_datos/README.md#Clusterion)
-4. [Comparación de Modelos](4.Comparaciòn_de_Modelos/README.md#ComparacionDeModelos)
+2. [Preprocesamiento de datos (Data Cleaning)](2.Preprocesamiento_de_datos/)
+3. [Comparación de Modelos](3.Comparación_de_Modelos/)
 
 
 
