@@ -41,7 +41,9 @@ Se utilizo Google Cloud Platform:
 Se utilizaron 5 bases de datos:
 
 1. Alarmas
+
 2. Telemetría de muebles frigoríficos
+
 3. Telemetría de central de frío
 4. Base de datos relacionales Zonas, centros, Tiendas y elementos
 5. Base de datos relacionales de Tiendas y sus coordenadas
