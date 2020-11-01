@@ -117,8 +117,55 @@ Sensores descalibrados
 Variables sin información
 Variables dependientes
 
-<img src="./Images/Descripcion.png" width="75%"><br/>
+<img src="./Images/Descripcion.png" width="100%"><br/>
 
+2. Preprocesamiento de datos (Data Cleaning)
+<img src="./Images/df_alarm.png" width="100%"><br/>
+
+
+Procedemos a generar un data set el cual sera utilizado para el entremiento del algoritmo, de la sguente forma:
+
+    1. utilizamos la base de datos de las alarmas y filtramos de la siguente manera:
+        * filtramos las alarmas que hayan sido generadas por murales de carne y murales de pescados ambos con controladores RX600.  
+
+        | Field name|DESCRIPTION|  
+        | ----------|-------|
+        | Example      |Alarma Alta Temperatura en servicio  |
+
+        *filtramos el comienzo de la Alarma con la descripccion Begin que cumpla la siguiente condiccion:
+            * No pueden haber estado inabilitadas antes de su activacion. sino la misma deberia ser considerada como mantenimiento preventivo.
+        
+        **Alarma Critica**
+        | Field name|TYPE|  
+        | ----------|-------|
+        | Example      |EnabledNotif |
+        | Example      |InhibitNotif|
+        | Example      |**EnabledNotif**|
+        | Example      |Being  |
+        | Example      |End  |
+
+        **Alarma Desabilitada antes de su inicio**
+
+        | Field name|TYPE|  
+        | ----------|-------|
+        | Example      |EnabledNotif |
+        | Example      |EnabledNotif|
+        | Example      |**InhibitNotif**|
+        | Example      |Being  |
+        | Example      |End  |
+        
+        Este filtrado se realiza de la siguente forma:
+
+
+        ```
+            for i, row  in df_Alarms.iterrows():
+        if (df_Alarms.loc[i,'ALTA_TEMPERATURA']) =='Begin' and  (df_Alarms.loc[i-1,'ALTA_TEMPERATURA'])!='InhibitNotif':
+            df_Alarms.at[i,'new'] = 'True'
+        elif (df_Alarms.loc[i,'ALTA_TEMPERATURA']) =='Begin' and  (df_Alarms.loc[i-1,'ALTA_TEMPERATURA'])=='InhibitNotif':
+            df_Alarms.at[i,'new'] = 'True but InhibitNotif by user'
+        else:
+            df_Alarms.at[i,'new'] = 'False'     
+        ``` 
 
 
 
