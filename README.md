@@ -38,15 +38,22 @@ Se utilizo Google Cloud Platform:
 
 ## Base de datos utilizadas <a name="datasets"></a>
 
-Para el 
+Se utilizaron 3 bases de datos:
+
+1. Alarmas :
+Base de datos de alarmas de todos los centros con los siguientes campos:
 
 | Field name|IDALARM|  TS      | TYPE     |DESCRIPTION| ELEMENT |  PARENT |TEMPLATE|CENTRO | NAME | NAME_ZONA|
 | ----------|-------| ------- | -------- |-----------| --------|---------|------- |-------|------|----------|
 | Type      |INTEGER|TIMESTAND|  STRING  |  STRING   |INTEGER  | INTEGER |STRING  |STRING |STRING |STRING   |
 
 
+2. Variables (Telemetria de sensores de Muebles Frigorificos) :
+Base de datos de la telemetria de los distintos muebles frigorificos obtenidos por controladores RX600 con siguientes campos:
 
-
+| Field name|TS|ELEMENT| TAG_SONDA_PB1|TAG_SONDA_PB2|TAG_PRESION_SATURACION|TAG_TEMP_ASPIRACION|TAG_RECALENT_VALVULA|TAG_APERT_VALVULA |TAG_EQUIPO_STANDBY|TAG_PETICION_FRIO|TAG_COMUNICA|TAG_DESCARCHE|TAG_ALARMA|
+| ----------|-------| ------- | -------- |-----------| --------|---------|------- |-------|------|----------|------|------|------|
+| Type      |TIMESTAND|INTEGER|  FLOAT  |  FLOAT   |FLOAT  | FLOAT |FLOAT  |FLOAT |FLOAT |FLOAT   |FLOAT   |FLOAT   |FLOAT   |
 
 
 
