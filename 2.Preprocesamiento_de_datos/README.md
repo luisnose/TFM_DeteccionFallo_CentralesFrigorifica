@@ -2,7 +2,7 @@ TFM Mercadona: Detecccion de fallos en muebles frigorificos
 
 <img src="../Images/mercadona_logo.png" width="40%"><br/>
 
-##2. Preprocesamiento de datos (Data Cleaning) <a name="Preprocesamientodeldatos"></a>
+## 2. Preprocesamiento de datos (Data Cleaning) <a name="Preprocesamientodeldatos"></a>
 
 
 Procedemos a generar un dataset el cual será utilizado para el entrenamiento del algoritmo, de la siguiente forma:
