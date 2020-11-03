@@ -98,7 +98,9 @@ df_central = df_central.loc[(df_central['TAG_SONDA_COND'] >-500) ]
 df_central = df_central.loc[(df_central['TAG_SONDA_TEMP_EXT'] >-10) ]
 df_central = df_central.loc[(df_central['TAG_SONDA_TEMP_SUBENF'] >-10) ]
 ```
-## 3. Realizamos un resample para generar las muestra y crear una data con un timestamp peridorico cada 1 min.<a name="resampledata"></a>
+
+<a name="resampledata"></a>
+## 3. Realizamos un resample para generar las muestra y crear una data con un timestamp peridorico cada 1 min.
 
 Para realizar el resample de data se tiene que agrupar por elementos por que cada uno comienza y termina en fechas distintas
 
