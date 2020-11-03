@@ -33,7 +33,7 @@ Se utilizo **SAP Data Services** para la extraccion de datos
 
 Se utilizo **Google Cloud Platform** para almacenamiento y analitica de datos:
 
-<img src="./Images/GCP.png" width="75%"><br/>
+<img src="./Images/GCP.png" width="100%"><br/>
 
 ## Base de datos utilizadas <a name="datasets"></a>
 
