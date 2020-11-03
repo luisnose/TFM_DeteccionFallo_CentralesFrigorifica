@@ -9,6 +9,8 @@ TFM Mercadona: Detecccion de fallos en muebles frigorificos
 Para analizar las variables extraemos 5 Gbs de telemetria almacenamos en Bigquery entre proyectos, dicha carga se realiza de la siguiente forma:
 
 ```
+from google.cloud import bigquery
+from google.oauth2 import service_account
 # TODO(developer): Set key_path to the path to the service account key
 #                  file.
 key_path = "Credentials/mdona-cloud-labpri-ctrlsenales-8449b1ab35ba.json"

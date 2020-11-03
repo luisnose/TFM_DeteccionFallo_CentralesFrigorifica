@@ -9,7 +9,7 @@ Para el procesamiento se realizaron las siguentes tranformaciones
 1. [Filtrado de alarmas críticas de la tabla de alarma.](#filtradoalarma)
 2. [Eliminamos outliers de la telemetría en la tabla de muebles frigoríficos y central de frio.](#outliers2)
 3. [Realizamos un resample para generar las muestra y crear una data con un timestamp peridorico cada 1 min.](#resampledata)
-4. [Rellenamos los valores faltantes de la table:](#missingvalues)
+4. [Rellenamos los valores faltantes de la tabla:](#missingvalues)
     * Para Variables categóricos realizamos un .fillna(method='ffill') donde propagamos los valores con el mismo valor
     * Para Variables continuas, realizamos una interpolación de valores
 5. [Realizamos un merge de las variables de cada mural con sus valores de la central de frio](#mergedata)
@@ -17,6 +17,7 @@ Para el procesamiento se realizaron las siguentes tranformaciones
 7. [Generamos 2 columnas nuevas:](#lables2)
     * (Clycle_number) Una Columna para identificar los ciclos (1 para cada alarma crítica)
     * (RUL)Una para identificar por min, la cantidad de minutos restantes hasta el momento del fallo
+8. [Cargamos el data set final en Google Cloud Storage](#GCS_Uploda)
 
 
 
@@ -141,7 +142,7 @@ def new_columns(data):
 df = new_columns(data_frame)
 
 ```
-## 4. Rellenamos los valores faltantes de la table:<a name="missingvalues"></a>
+## 4. Rellenamos los valores faltantes de la tabla:<a name="missingvalues"></a>
 
 ```
 def Interpolate_data(data):
@@ -177,6 +178,55 @@ df = Interpolate_data(data_frame)
 ```
 
 
+<a name="mergedata"></a>
+
+## 5. Realizamos un merge de las variables de cada mural con sus valores de la central de frio
+
+```
+def merge_variables_central(data):
+    cycles = data['cycle_number'].unique()
+    df_merge_final = pd.DataFrame([])
+    for i  in range(len(cycles)):
+        df_loop =  data.loc[data['cycle_number']==cycles[i]]
+        locaciones = df_loop['ID_LOCATION'].unique()[0]
+        df_loop_central = df_central.loc[df_central['ID_LOCATION']==locaciones]        
+        df_loop = df_loop.merge(df_loop_central, on=['ID_LOCATION','TS'],  how='left')
+        
+        df_merge_final = df_merge_final.append(df_loop).reset_index(drop=True)
+    return df_merge_final
+
+df = merge_variables_central(dataframe)
+
+```
+
+
+<a name="mergealarmas"></a>
+
+## 6. Extraemos por medio de un merge, ventanas de 10 días de telemetría antes de las alarmas críticas filtradas en el primer paso
+```
+def merging_data(data_telemetria, data_alarmas):
+    cycles = data_alarmas['cycle_number'].unique()
+    df_timeframe = pd.DataFrame([])
+    for i  in range(len(cycles)):
+        Alarm_cycle =data_alarmas.loc[data_alarmas['cycle_number']==cycles[i]]
+        elemento = Alarm_cycle.iloc[0,0]
+        t_max = Alarm_cycle['TS'].max() 
+        t_min = t_max - relativedelta(days=10)
+        df_loop = data_telemetria.loc[data_telemetria['ELEMENT']==elemento]
+        df_loop = df_loop.loc[(df_loop['TS'] > t_min) & (df_loop['TS'] <= t_max)]
+        if df_loop.shape[0] >1:
+            df_loop.at[:,'cycle_number'] = (i+1)
+            df_timeframe = df_timeframe.append(df_loop).reset_index(drop=True)
+
+     
+    return( df_timeframe[['TS']+['ELEMENT']+['TAG_SONDA_PB1']+['TAG_SONDA_PB2']+['TAG_PRESION_SATURACION']+
+              ['TAG_TEMP_ASPIRACION']+['TAG_RECALENT_VALVULA']+['TAG_APERT_VALVULA']+['TAG_PETICION_FRIO']+
+              ['TAG_DESCARCHE']+['cycle_number']])
+
+df = merging_data(data_telemetria, data_alarmas )
+```
+
+
 ## 7.Para Generar columna de ciclos unicos para cada alarma se realiza de la siguente forma:<a name="lables2"></a>
 
 ```
@@ -208,8 +258,14 @@ def prepare_train_data(data, factor = 0):
 df = prepare_train_data(data_frame)
 ```
 
+## 8. Cargamos el data set final en Google Cloud Storage: <a name="GCS_Uploda"></a>
 
-
-
-
+```
+from google.cloud import storage
+client = storage.Client()
+bucket = client.get_bucket('mdona-cloud-lab-ctrlsenales-bucket')
+    
+bucket.blob('Dataset_mane.csv').upload_from_string(data_frame.to_csv(), 'text/csv')
+print('the dataset in period minutes was load')
+```
 
