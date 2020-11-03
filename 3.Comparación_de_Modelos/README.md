@@ -122,8 +122,27 @@ X_train.columns = sequence_cols
 Cada uno de los algoritmos mencionados se entrenan y se guardan los pesos en una fichero.
 
 ```
+# early stopping
+import joblib
+from time import time
+from sklearn.metrics import accuracy_score, precision_score, recall_score
+from numpy import loadtxt
+from xgboost import XGBClassifier
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import accuracy_score
 
-Luis
+
+model = XGBClassifier()
+eval_set = [(X_test, y_test)]
+model.fit(X_train, y_train, early_stopping_rounds=20, eval_metric="logloss", eval_set=eval_set, verbose=True)
+# make predictions for test data
+y_pred = model.predict(X_test)
+predictions = [round(value) for value in y_pred]
+# evaluate predictions
+accuracy = accuracy_score(y_test, predictions)
+print("Accuracy: %.2f%%" % (accuracy * 100.0))
+
+joblib.dump(model, './Models/I{}h_F{}h_W{}m_S5m_XGB_model.pkl'.format(HoraIni, HoraFin+1,Window))
 ```
 
 ## 6. Evaluacion de modelos <a name="Evaluarmodelo"></a> 
