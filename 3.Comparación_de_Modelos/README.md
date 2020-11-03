@@ -121,61 +121,15 @@ X_train.columns = sequence_cols
 
 Cada uno de los algoritmos mencionados se entrenan y se guardan los pesos en una fichero.
 
-´´´
-import joblib
-from time import time
-from sklearn.metrics import accuracy_score, precision_score, recall_score
-from numpy import loadtxt
-from xgboost import XGBClassifier
-from sklearn.model_selection import train_test_split
-from sklearn.metrics import accuracy_score
+```
 
-
-model = XGBClassifier()
-eval_set = [(X_test, y_test)]
-model.fit(X_train, y_train, early_stopping_rounds=20, eval_metric="logloss", eval_set=eval_set, verbose=True)
-
-y_pred = model.predict(X_test)
-predictions = [round(value) for value in y_pred]
-
-accuracy = accuracy_score(y_test, predictions)
-print("Accuracy: %.2f%%" % (accuracy * 100.0))
-
-joblib.dump(model, './Models/I{}h_F{}h_W{}m_S5m_XGB_model.pkl'.format(HoraIni, HoraFin+1,Window))
-
-
-from matplotlib import pyplot
-print(model.feature_importances_)
-
-pyplot.bar(range(len(model.feature_importances_)), model.feature_importances_)
-pyplot.show()
-´´´
+Luis
+```
 
 ## 6. Evaluacion de modelos <a name="Evaluarmodelo"></a> 
 
 Se cargan los pesos de cada modelo y evaluarlo con ciclos de alarmas con los cuales no haya sido entrenado
 
-´´´
-models = {}
-#'SVM', 'MLP',
-for mdl in ['SVM','LR','RF','XGB']:
-    models[mdl] = joblib.load('./Models/I{}h_F{}h_W{}m_S5m_{}_model.pkl'.format(HoraIni, HoraFin+1,Window,mdl))
-    
-    
-def evaluate_model(name, model, features, labels):
-    start = time()
-    pred = model.predict(features)
-    end = time()
-    accuracy = round(accuracy_score(labels, pred), 3)
-    precision = round(precision_score(labels, pred), 3)
-    recall = round(recall_score(labels, pred), 3)
-    print('{} -- Accuracy: {} / Precision: {} / Recall: {} / Latency: {}ms'.format(name,
-                                                                                   accuracy,
-                                                                                   precision,
-                                                                                   recall,
-                                                                                   round((end - start)*1000, 1)))
-
-    
-for name, mdl in models.items():
-    evaluate_model(name, mdl, X_test, y_test)
-    ´´´
+```
+luis
+```
