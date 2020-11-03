@@ -16,7 +16,6 @@ TFM Mercadona: Detecccion de fallos en muebles frigorificos
 
 ## Objetivo del proyecto <a name="Objetivo"></a>
 
-
 Prescribir la arquitectura que permita el tratamiento de más de 3 TB de datos. 
 
 Descripción de variables obtenidas de un mueble frigorífico y central de frio.

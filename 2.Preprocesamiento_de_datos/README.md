@@ -4,6 +4,21 @@ TFM Mercadona: Detecccion de fallos en muebles frigorificos
 
 ## 2. Preprocesamiento de datos (Data Cleaning) <a name="Preprocesamientodeldatos"></a>
 
+Para el procesamiento se realizaron las siguentes tranformaciones 
+
+1. [Filtrado de alarmas críticas de la tabla de alarma.](#filtradoalarma)
+2. Eliminamos outliers de la telemetría en la tabla de muebles frigoríficos y central de frio.
+3. Realizamos un resample para generar las muestra y crear una data con un timestamp peridorico cada 1 min.
+4. Rellenamos los valores faltantes de la table:
+    * Para Variables categóricos realizamos un .fillna(method='ffill') donde propagamos los valores con el mismo valor
+    * Para Variables continuas, realizamos una interpolación de valores
+5. Realizamos un merge de las variables de cada mural con sus valores de la central de frio
+6. Extraemos por medio de un merge, ventanas de 10 días de telemetría antes de las alarmas críticas filtradas en el primer paso 
+7. Generamos 2 columnas nuevas:
+    * (Clycle_number) Una Columna para identificar los ciclos (1 para cada alarma crítica)
+    * (RUL)Una para identificar por min, la cantidad de minutos restantes hasta el momento del fallo
+
+
 
 Procedemos a generar un dataset el cual será utilizado para el entrenamiento del algoritmo, de la siguiente forma:
 
@@ -11,7 +26,7 @@ Procedemos a generar un dataset el cual será utilizado para el entre
 Utilizamos la base de datos de las alarmas y filtramos de la siguiente manera:
 
 <img src=".././Images/df_alarm.png" width="100%"><br/>
-* filtramos las alarmas que habían sido generadas por murales de carne y murales de pescados ambos con controladores RX600.  
+* filtramos las alarmas que habían sido generadas por murales de carne y murales de pescados ambos con controladores RX600.  <a name="filtradoalarma"></a>
 
 | Field name|DESCRIPTION|  
 | ----------|-------|
@@ -66,7 +81,22 @@ else:
             df_Alarms.at[i,'new2'] = 'True'  
 ``` 
 
+Para Generar columna de ciclos unicos para cada alarma se realiza de la siguente forma:
 
+```
+def label_Cycle(data):
+    cycles = data['cycle_number'].unique()
+    df = pd.DataFrame([])
+    for i  in range(len(cycles)):
+        df_loop = data.loc[data['cycle_number']==cycles[i]]
+        
+        df_loop.loc[:,'cycle_number']=(i+1)
+     
+        df = df.append(df_loop).reset_index(drop=True)
+    return(df)
+    
+df = label_Cycle(data_frame)
+```
 
 
 
