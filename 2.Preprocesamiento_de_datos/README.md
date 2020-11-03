@@ -23,7 +23,7 @@ Para el procesamiento se realizaron las siguentes tranformaciones
 Procedemos a generar un dataset el cual será utilizado para el entrenamiento del algoritmo, de la siguiente forma:
 
 
-# 1. Utilizamos la base de datos de las alarmas y filtramos de la siguiente manera:<a name="filtradoalarma"></a>
+## 1. Utilizamos la base de datos de las alarmas y filtramos de la siguiente manera:<a name="filtradoalarma"></a>
 
 <img src=".././Images/df_alarm.png" width="100%"><br/>
 * filtramos las alarmas que habían sido generadas por murales de carne y murales de pescados ambos con controladores RX600.  
@@ -81,7 +81,7 @@ else:
             df_Alarms.at[i,'new2'] = 'True'  
 ``` 
 
-# 2. Eliminamos outliers de la telemetría en la tabla de muebles frigoríficos y central de frio:<a name="outliers2"></a>
+## 2. Eliminamos outliers de la telemetría en la tabla de muebles frigoríficos y central de frio:<a name="outliers2"></a>
 ```
 #df_central = df_central.loc[(df_central['TAG_CONV_SONDA_ASP'] >-500) ]
 #df_central = df_central.loc[(df_central['TAG_CONV_SONDA_COND'] >-500) ]
@@ -98,7 +98,7 @@ df_central = df_central.loc[(df_central['TAG_SONDA_COND'] >-500) ]
 df_central = df_central.loc[(df_central['TAG_SONDA_TEMP_EXT'] >-10) ]
 df_central = df_central.loc[(df_central['TAG_SONDA_TEMP_SUBENF'] >-10) ]
 ```
-# 3. Realizamos un resample para generar las muestra y crear una data con un timestamp peridorico cada 1 min.<a name="resampledata"></a>
+## 3. Realizamos un resample para generar las muestra y crear una data con un timestamp peridorico cada 1 min.<a name="resampledata"></a>
 
 Para realizar el resample de data se tiene que agrupar por elementos por que cada uno comienza y termina en fechas distintas
 
@@ -139,7 +139,7 @@ def new_columns(data):
 df = new_columns(data_frame)
 
 ```
-# 4. Rellenamos los valores faltantes de la table:<a name="missingvalues"></a>
+## 4. Rellenamos los valores faltantes de la table:<a name="missingvalues"></a>
 
 ```
 def Interpolate_data(data):
@@ -175,7 +175,7 @@ df = Interpolate_data(data_frame)
 ```
 
 
-# 7.Para Generar columna de ciclos unicos para cada alarma se realiza de la siguente forma:<a name="lables2"></a>
+## 7.Para Generar columna de ciclos unicos para cada alarma se realiza de la siguente forma:<a name="lables2"></a>
 
 ```
 def label_Cycle(data):
