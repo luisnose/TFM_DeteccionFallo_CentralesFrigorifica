@@ -6,32 +6,111 @@ TFM Mercadona: Detecccion de fallos en muebles frigorificos
 
 ## 3.  Comparación de Modelos <a name="Comparación_de_Modelos"></a>
 
-Para la compraracion de modelos se utlizo la libreria **sklearn** y **xgboost**:
+Para la compraracion de modelos se utlizo la libreria **sklearn** y **xgboost** y se compararon los siguentes algoritmos:
+*Regresión logística
+*SVM (Support vector machine)
+*Random Forest 
+*XGboost
 
-se comprobaron distintas etiquetas con distintas ventanas de tiempo:
+El notebook realiza los siguentes pasos:
 
-HoraIni = 1 #Hrs from failure
-HoraFin = 1 #Hrs from failure
-IniNor= 3*24 #Hrs start first sample of Normal
-Window =30 #minutes of time series vector
-Steps = 6#steps used on the same record (a record will have variables from t to the end of window according to the steps)
-
-
-1. [Filtrado de alarmas críticas de la tabla de alarma.](#filtradoalarma)
-2. [Eliminamos outliers de la telemetría en la tabla de muebles frigoríficos y central de frio.](#outliers2)
-3. [Realizamos un resample para generar las muestra y crear una data con un timestamp peridorico cada 1 min.](#resampledata)
-4. [Rellenamos los valores faltantes de la tabla:](#missingvalues)
-    * Para Variables categóricos realizamos un .fillna(method='ffill') donde propagamos los valores con el mismo valor
-    * Para Variables continuas, realizamos una interpolación de valores
-5. [Realizamos un merge de las variables de cada mural con sus valores de la central de frio](#mergedata)
-6. [Extraemos por medio de un merge, ventanas de 10 días de telemetría antes de las alarmas críticas filtradas en el primer paso](#mergealarmas)
-7. [Generamos 2 columnas nuevas:](#lables2)
-    * (Clycle_number) Una Columna para identificar los ciclos (1 para cada alarma crítica)
-    * (RUL)Una para identificar por min, la cantidad de minutos restantes hasta el momento del fallo
-8. [Cargamos el data set final en Google Cloud Storage](#GCS_Uploda)
-
+1. [Generar valores de ventanas](#ventanas)
+2. [Convertimos los registros a series temporales.](#Cectordetiempo)
+3. [Generamos la etiqueta de fallo y normales ](#resampledata)
+4. [Estandarización de los valores de train y test](#scalevalues)
 
 
 
 ![gif](https://github.com/luisnose/TFM_Mercadona_DeteccionFallo_CentralesFrigorifica/blob/main/Images/Vectordetiempo.gif)
 
+
+## 1. Generar valores de ventanas<a name="ventanas"></a>
+
+HoraIni =  Tiempo de antelacion al fallo
+HoraFin = Fin de la ventana de fallo
+IniNor = tiempo de incio de ventana de estado normal   *Se toman dias antes del fallo para evitar tomar valores en estado de fallo
+Window = Minutos de tamaño del vector de tiempo
+Steps = Cantidad de muestras dentro del vector de tiempo
+
+
+
+## 2. Convertimos los registros a series temporales<a name="Cectordetiempo"></a>
+
+```
+def transform_to_supervised(df, previous_steps=1, dropnan=True):
+
+ 
+    # original column names
+    col_names = df.columns
+    
+    # list of columns and corresponding names we'll build from 
+    # the originals found in the input DataFrame
+    cols, names = list(), list()
+
+    # input sequence (t-n, ... t-1)
+    for i in range(previous_steps, 0,(int(-Window/Steps))):
+        cols.append(df.shift(i))
+        names += [('%s(t-%d)' % (col_name, i)) for col_name in col_names]
+
+    # put all the columns together into a single aggregated DataFrame
+    agg = pd.concat(cols, axis=1)
+    agg.columns = names
+
+    # drop rows with NaN values
+    if dropnan:
+        agg.dropna(inplace=True)
+
+    return agg
+
+def To_TimeSeries(data):
+    cycles = data['cycle_number'].unique()
+    df_time = pd.DataFrame([])
+    for i  in range(len(cycles)):
+        df_loop = data.loc[data['cycle_number'] == (i+1)]
+        df_time_fail = df_loop[(df_loop['RUL'].isin(fail) )]
+        df_time_normal = df_loop[(df_loop['RUL'].isin(normal))]
+# Counter till 60 jumping with a step of 10 (in total 6 samples): t-60, t-50... t-10, t                                                                       
+        df_time_fail = transform_to_supervised(df_time_fail[sequence_cols], int(Window), dropnan=False)
+        df_time_normal = transform_to_supervised(df_time_normal[sequence_cols], int(Window), dropnan=False)
+    
+        df_time = df_time.append(df_time_normal).reset_index(drop=True)
+        df_time = df_time.append(df_time_fail).reset_index(drop=True)
+    return(df_time)
+
+
+
+df = To_TimeSeries(Data_frame)
+```
+
+
+## 3. Generamos la etiqueta de fallo y normales<a name="resampledata"></a> ]
+
+Se etiqueta como uno (1) las muestras de fallo y como cero (0) las muestras en estado normal
+
+indicando que los valores anteriores a la hora fin sean etiquetados como uno y los valores posteriores como cero
+
+```
+df['label1'] = np.where(df['RUL'] <= HoraFin, 1, 0 )
+
+```
+
+## 4. Estandarización<a name="scalevalues"></a> ]
+
+
+La estandarización de conjuntos de datos es un requisito común para muchos estimadores de aprendizaje automático implementados en scikit-learn; podrían comportarse mal si las características individuales no se parecen más o menos a datos estándar distribuidos normalmente: Gaussiano con media cero y varianza unitaria.
+
+```
+cols=list(df_time.columns)
+sequence_cols= cols[2:-3]
+
+from sklearn.preprocessing import scale
+
+y_test = test_data['label1']
+X_test = pd.DataFrame(scale(test_data.filter(sequence_cols,axis = 1)))
+X_test.columns = sequence_cols
+
+
+y_train = train_data['label1']
+X_train = pd.DataFrame(scale(train_data.filter(sequence_cols,axis = 1)))
+X_train.columns = sequence_cols
+```
