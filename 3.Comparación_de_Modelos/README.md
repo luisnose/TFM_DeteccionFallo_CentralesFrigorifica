@@ -121,7 +121,6 @@ X_train.columns = sequence_cols
 
 Cada uno de los algoritmos mencionados se entrenan y se guardan los pesos en una fichero.
 
-
 ´´´
 import joblib
 from time import time
@@ -135,10 +134,10 @@ from sklearn.metrics import accuracy_score
 model = XGBClassifier()
 eval_set = [(X_test, y_test)]
 model.fit(X_train, y_train, early_stopping_rounds=20, eval_metric="logloss", eval_set=eval_set, verbose=True)
-# make predictions for test data
+
 y_pred = model.predict(X_test)
 predictions = [round(value) for value in y_pred]
-# evaluate predictions
+
 accuracy = accuracy_score(y_test, predictions)
 print("Accuracy: %.2f%%" % (accuracy * 100.0))
 
@@ -147,7 +146,7 @@ joblib.dump(model, './Models/I{}h_F{}h_W{}m_S5m_XGB_model.pkl'.format(HoraIni, H
 
 from matplotlib import pyplot
 print(model.feature_importances_)
-# plot
+
 pyplot.bar(range(len(model.feature_importances_)), model.feature_importances_)
 pyplot.show()
 ´´´
