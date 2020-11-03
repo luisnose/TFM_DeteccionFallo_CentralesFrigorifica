@@ -18,6 +18,8 @@ El notebook realiza los siguentes pasos:
 2. [Convertimos los registros a series temporales.](#Cectordetiempo)
 3. [Generamos la etiqueta de fallo y normales ](#resampledata)
 4. [Estandarización de los valores de train y test](#scalevalues)
+5. [Entrenamiento de los modelos](#Entrenarmodelo)
+6. [Evaluacion de modelos](#Evaluarmodelo)
 
 
 
@@ -26,12 +28,11 @@ El notebook realiza los siguentes pasos:
 
 ## 1. Generar valores de ventanas<a name="ventanas"></a>
 
-HoraIni =  Tiempo de antelacion al fallo
-HoraFin = Fin de la ventana de fallo
-IniNor = tiempo de incio de ventana de estado normal   *Se toman dias antes del fallo para evitar tomar valores en estado de fallo
-Window = Minutos de tamaño del vector de tiempo
-Steps = Cantidad de muestras dentro del vector de tiempo
-
+* HoraIni =  Tiempo de antelacion al fallo
+* HoraFin = Fin de la ventana de fallo
+* IniNor = tiempo de incio de ventana de estado normal   *Se toman dias antes del fallo para evitar tomar valores en estado de fallo
+* Window = Minutos de tamaño del vector de tiempo
+* Steps = Cantidad de muestras dentro del vector de tiempo
 
 
 ## 2. Convertimos los registros a series temporales<a name="Cectordetiempo"></a>
@@ -94,7 +95,7 @@ df['label1'] = np.where(df['RUL'] <= HoraFin, 1, 0 )
 
 ```
 
-## 4. Estandarización<a name="scalevalues"></a> ]
+## 4. Estandarización<a name="scalevalues"></a> 
 
 
 La estandarización de conjuntos de datos es un requisito común para muchos estimadores de aprendizaje automático implementados en scikit-learn; podrían comportarse mal si las características individuales no se parecen más o menos a datos estándar distribuidos normalmente: Gaussiano con media cero y varianza unitaria.
@@ -114,3 +115,68 @@ y_train = train_data['label1']
 X_train = pd.DataFrame(scale(train_data.filter(sequence_cols,axis = 1)))
 X_train.columns = sequence_cols
 ```
+
+
+## 5. Entrenamiento de los modelos <a name="Entrenarmodelo"></a> 
+
+Cada uno de los algoritmos mencionados se entrenan y se guardan los pesos en una fichero.
+
+
+´´´
+import joblib
+from time import time
+from sklearn.metrics import accuracy_score, precision_score, recall_score
+from numpy import loadtxt
+from xgboost import XGBClassifier
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import accuracy_score
+
+
+model = XGBClassifier()
+eval_set = [(X_test, y_test)]
+model.fit(X_train, y_train, early_stopping_rounds=20, eval_metric="logloss", eval_set=eval_set, verbose=True)
+# make predictions for test data
+y_pred = model.predict(X_test)
+predictions = [round(value) for value in y_pred]
+# evaluate predictions
+accuracy = accuracy_score(y_test, predictions)
+print("Accuracy: %.2f%%" % (accuracy * 100.0))
+
+joblib.dump(model, './Models/I{}h_F{}h_W{}m_S5m_XGB_model.pkl'.format(HoraIni, HoraFin+1,Window))
+
+
+from matplotlib import pyplot
+print(model.feature_importances_)
+# plot
+pyplot.bar(range(len(model.feature_importances_)), model.feature_importances_)
+pyplot.show()
+´´´
+
+## 6. Evaluacion de modelos <a name="Evaluarmodelo"></a> 
+
+Se cargan los pesos de cada modelo y evaluarlo con ciclos de alarmas con los cuales no haya sido entrenado
+
+´´´
+models = {}
+#'SVM', 'MLP',
+for mdl in ['SVM','LR','RF','XGB']:
+    models[mdl] = joblib.load('./Models/I{}h_F{}h_W{}m_S5m_{}_model.pkl'.format(HoraIni, HoraFin+1,Window,mdl))
+    
+    
+def evaluate_model(name, model, features, labels):
+    start = time()
+    pred = model.predict(features)
+    end = time()
+    accuracy = round(accuracy_score(labels, pred), 3)
+    precision = round(precision_score(labels, pred), 3)
+    recall = round(recall_score(labels, pred), 3)
+    print('{} -- Accuracy: {} / Precision: {} / Recall: {} / Latency: {}ms'.format(name,
+                                                                                   accuracy,
+                                                                                   precision,
+                                                                                   recall,
+                                                                                   round((end - start)*1000, 1)))
+
+    
+for name, mdl in models.items():
+    evaluate_model(name, mdl, X_test, y_test)
+    ´´´
