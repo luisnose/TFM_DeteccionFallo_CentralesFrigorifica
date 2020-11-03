@@ -19,6 +19,8 @@ Para el procesamiento se realizaron las siguentes tranformaciones
     * (RUL)Una para identificar por min, la cantidad de minutos restantes hasta el momento del fallo
 8. [Cargamos el data set final en Google Cloud Storage](#GCS_Uploda)
 
+![gif](https://github.com/luisnose/TFM_Mercadona_DeteccionFallo_CentralesFrigorifica/blob/main/Images/Limpieza_Trim.gif)
+
 
 
 Procedemos a generar un dataset el cual será utilizado para el entrenamiento del algoritmo, de la siguiente forma:
