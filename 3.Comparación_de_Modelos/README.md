@@ -33,4 +33,6 @@ Steps = 6#steps used on the same record (a record will have variables from t to 
 
 
 
-![gif](https://github.com/luisnose/TFM_Mercadona_DeteccionFallo_CentralesFrigorifica/tree/main/Images/Vectordetiempo.gif)
+![gif](https://github.com/luisnose/TFM_Mercadona_DeteccionFallo_CentralesFrigorifica/blob/main/Images/Vectordetiempo.gif)
+
+![gif](https://github.com/diecalsa-EDEM/FenixCV/blob/facialDetection/src/DontTouchYourFace.gif)
