@@ -131,5 +131,26 @@ Luis
 Se cargan los pesos de cada modelo y evaluarlo con ciclos de alarmas con los cuales no haya sido entrenado
 
 ```
-luis
+models = {}
+#'SVM', 'MLP',
+for mdl in ['SVM','LR','RF','XGB']:
+    models[mdl] = joblib.load('./Models/I{}h_F{}h_W{}m_S5m_{}_model.pkl'.format(HoraIni, HoraFin+1,Window,mdl))
+    
+    
+def evaluate_model(name, model, features, labels):
+    start = time()
+    pred = model.predict(features)
+    end = time()
+    accuracy = round(accuracy_score(labels, pred), 3)
+    precision = round(precision_score(labels, pred), 3)
+    recall = round(recall_score(labels, pred), 3)
+    print('{} -- Accuracy: {} / Precision: {} / Recall: {} / Latency: {}ms'.format(name,
+                                                                                   accuracy,
+                                                                                   precision,
+                                                                                   recall,
+                                                                                   round((end - start)*1000, 1)))
+
+    
+for name, mdl in models.items():
+    evaluate_model(name, mdl, X_test, y_test)
 ```
