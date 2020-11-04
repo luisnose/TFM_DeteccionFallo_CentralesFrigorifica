@@ -1,6 +1,5 @@
 TFM Mercadona: Detecccion de fallos en muebles frigorificos
 
-<img src="../Images/mercadona_logo.png" width="40%"><br/>
 
 
 
