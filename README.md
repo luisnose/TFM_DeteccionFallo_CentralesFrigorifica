@@ -1,4 +1,4 @@
-TFM Mercadona: Detecccion de fallos en muebles frigorificos
+TFM: Detecccion de fallos en muebles frigorificos
 
 
 
