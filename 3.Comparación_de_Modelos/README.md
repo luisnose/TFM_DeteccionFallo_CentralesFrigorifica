@@ -1,4 +1,4 @@
-TFM Mercadona: Detecccion de fallos en muebles frigorificos
+TFM: Detecccion de fallos en muebles frigorificos
 
 
 
@@ -22,7 +22,7 @@ El notebook realiza los siguentes pasos:
 
 
 
-![gif](https://github.com/luisnose/TFM_Mercadona_DeteccionFallo_CentralesFrigorifica/blob/main/Images/Vectordetiempo.gif)
+![gif](https://github.com/luisnose/TFM_DeteccionFallo_CentralesFrigorifica/blob/main/Images/Vectordetiempo.gif)
 
 
 ## 1. Generar valores de ventanas<a name="ventanas"></a>

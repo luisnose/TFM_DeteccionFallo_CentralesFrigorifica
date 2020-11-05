@@ -1,4 +1,4 @@
-TFM Mercadona: Detecccion de fallos en muebles frigorificos
+TFM: Detecccion de fallos en muebles frigorificos
 
 
 ## 2. Preprocesamiento de datos (Data Cleaning) <a name="Preprocesamientodeldatos"></a>
@@ -18,7 +18,7 @@ Para el procesamiento se realizaron las siguentes tranformaciones
     * (RUL)Una para identificar por min, la cantidad de minutos restantes hasta el momento del fallo
 8. [Cargamos el data set final en Google Cloud Storage](#GCS_Uploda)
 
-![gif](https://github.com/luisnose/TFM_Mercadona_DeteccionFallo_CentralesFrigorifica/blob/main/Images/Limpieza_Trim.gif)
+![gif](https://github.com/luisnose/TFM_DeteccionFallo_CentralesFrigorifica/blob/main/Images/Limpieza_Trim.gif)
 
 
 
@@ -264,7 +264,7 @@ df = prepare_train_data(data_frame)
 ```
 from google.cloud import storage
 client = storage.Client()
-bucket = client.get_bucket('mdona-cloud-lab-ctrlsenales-bucket')
+bucket = client.get_bucket('table-cloud-lab-ctrlsenales-bucket')
     
 bucket.blob('Dataset_mane.csv').upload_from_string(data_frame.to_csv(), 'text/csv')
 print('the dataset in period minutes was load')
