@@ -26,13 +26,13 @@ Comparación de modelos para comprobar la viabilidad de un mantenimient
 
 Se utilizo **SAP Data Services** para la extraccion de datos
 
-![Jupiter](Images/GCP2.png)
+![Jupiter](Images/GCP2_1.png)
 
 
 
 Se utilizo **Google Cloud Platform** para almacenamiento y analitica de datos:
 
-<img src="./Images/GCP.png" width="100%"><br/>
+<img src="./Images/GCP_1.png" width="100%"><br/>
 
 ## Base de datos utilizadas <a name="datasets"></a>
 
