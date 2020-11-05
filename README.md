@@ -17,20 +17,20 @@ TFM: Detecccion de fallos en muebles frigorificos
 
 Prescribir la arquitectura que permita el tratamiento de más de 3 TB de datos. 
 
-Descripción de variables obtenidas de un mueble frigorífico y central de frio.
+Descripción de variables obtenidas de un mueble frigorífico y central de frío.
 
 Comparación de modelos para comprobar la viabilidad de un mantenimiento predictivo con histórico de 1.5 años.
 
 
 ## Arquitectura <a name="Arquitectura"></a>
 
-Se utilizo **SAP Data Services** para la extraccion de datos
+Se utilizó **SAP Data Services** para la extracción de datos
 
 ![Jupiter](Images/GCP2_1.png)
 
 
 
-Se utilizo **Google Cloud Platform** para almacenamiento y analitica de datos:
+Se utilizó **Google Cloud Platform** para almacenamiento y analítica de datos:
 
 <img src="./Images/GCP_1.png" width="100%"><br/>
 
@@ -53,14 +53,14 @@ Base de datos de alarmas de todos los centros
 | Type      |INTEGER|TIMESTAND|  STRING  |  STRING   |INTEGER  | INTEGER |STRING  |STRING |STRING |STRING   |
 
 
-2. PIC_TRACK_VARIABLES_PREP (Telemetría de sensores de Muebles Frigorificos):
+2. PIC_TRACK_VARIABLES_PREP (Telemetría de sensores de Muebles Frigoríficos):
 Base de datos de la telemetría de los distintos muebles frigoríficos obtenidos por controladores RX600
 
 | Field name|TS|ELEMENT| TAG_SONDA_PB1|TAG_SONDA_PB2|TAG_PRESION_SATURACION|TAG_TEMP_ASPIRACION|TAG_RECALENT_VALVULA|TAG_APERT_VALVULA |TAG_EQUIPO_STANDBY|TAG_PETICION_FRIO|TAG_COMUNICA|TAG_DESCARCHE|TAG_ALARMA|
 | ----------|-------| ------- | -------- |-----------| --------|---------|------- |-------|------|----------|------|------|------|
 | Type      |TIMESTAND|INTEGER|  FLOAT  |  FLOAT   |FLOAT  | FLOAT |FLOAT  |FLOAT |FLOAT |FLOAT   |FLOAT   |FLOAT   |FLOAT   |
 
-3. PIC_TRACK_VARIABLES_PREP_CENTRALFRIO (Telemetria de sensores de la central frigorífica):
+3. PIC_TRACK_VARIABLES_PREP_CENTRALFRIO (Telemetría de sensores de la central frigorífica):
 Base de datos de la telemetría de la central frigorífica
 
 
@@ -71,7 +71,7 @@ Base de datos de la telemetría de la central frigorífica
 
 4. PIC_ELEMENT_LOCATION:
 
-Base de datos con los identificados unicos por tiendas, elementos, zonas y centros
+Base de datos con los identificados únicos por tiendas, elementos, zonas y centros
 
 | Field name|ID_ELEMENT	|IDENTIFIER_ELEMENT	|NAME_ELEMENT	|DESCRIPTION_ELEMENT	|ABBREVIATION_ELEMENT	|ORDERPOSITION_ELEMENT	|PARENT_ELEMENT	|TEMPLATE_ELEMENT	|TEMPLATEPROPERTIES_ELEMENT	|TYPE_ELEMENT	|ID_LOCATION	|IDENTIFIER_LOCATION	|NAME_LOCATION	|DESCRIPTION_LOCATION	|PARENT_LOCATION	|TEMPLATE_LOCATION	|TYPE_LOCATION	|	
 | ----------|-------| ------- | -------- |-----------| --------|---------|------- |-------|------|----------|------|------|------|-----------| --------|---------| --------|
@@ -97,7 +97,7 @@ Identificador de tiendas, altitud, longitud y altura con respecto al mar
 * **google** : Biblioteca de cliente de Cloud Storage para Python
 * **matplotlib** : Biblioteca para la generación de gráficos a partir de datos contenidos en listas o arrays 
 * **seaborn** : Biblioteca de visualización de datos de Python basada en matplotlib
-* **dateutil** : Biblioteca para analisis de series temporales
+* **dateutil** : Biblioteca para análisis de series temporales
 
 
 ## Notebooks utilizados <a name="Notebooks"></a>

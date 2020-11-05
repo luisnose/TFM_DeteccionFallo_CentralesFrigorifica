@@ -5,7 +5,7 @@ TFM: Detecccion de fallos en muebles frigorificos
 
 ## 1.  Descripción de Variables <a name="paginadescripcion"></a>
 
-Para analizar las variables extraemos 5 Gbs de telemetria almacenamos en Bigquery entre proyectos, dicha carga se realiza de la siguiente forma:
+Para analizar las variables extraemos 5 Gbs de telemetría almacenamos en Bigquery entre proyectos, dicha carga se realiza de la siguiente forma:
 
 ```
 from google.cloud import bigquery
@@ -21,7 +21,7 @@ credentials = service_account.Credentials.from_service_account_file(
 client = bigquery.Client(credentials=credentials, project=credentials.project_id,)
 ```
 "Credentials.json"
-[*Este archivo es unico y debe crearse por cada cuenta](https://cloud.google.com/docs/authentication/getting-started) 
+[*Este archivo es único y debe crearse por cada cuenta](https://cloud.google.com/docs/authentication/getting-started) 
 
 ```
 query = """
@@ -53,9 +53,9 @@ df_Variables.head()
 ```
 
 
-Notebook utilizacion para la descriopccion de la telemetria optenida de los muebles frigorificos y murales de frio.
+Notebook utilización para la descripción de la telemetría optenida de los muebles frigoríficos y murales de frío.
 
-    Identifiamos:
+    Identificamos:
 
     * Outliers
     * Sensores descalibrados

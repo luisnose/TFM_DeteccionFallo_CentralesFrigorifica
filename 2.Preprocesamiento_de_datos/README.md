@@ -1,17 +1,17 @@
-TFM: Detecccion de fallos en muebles frigorificos
+TFM: Deteccción de fallos en muebles frigoríficos
 
 
 ## 2. Preprocesamiento de datos (Data Cleaning) <a name="Preprocesamientodeldatos"></a>
 
-Para el procesamiento se realizaron las siguentes tranformaciones 
+Para el procesamiento se realizaron las siguentes transformaciones 
 
 1. [Filtrado de alarmas críticas de la tabla de alarma.](#filtradoalarma)
-2. [Eliminamos outliers de la telemetría en la tabla de muebles frigoríficos y central de frio.](#outliers2)
-3. [Realizamos un resample para generar las muestra y crear una data con un timestamp peridorico cada 1 min.](#resampledata)
+2. [Eliminamos outliers de la telemetría en la tabla de muebles frigoríficos y central de frío.](#outliers2)
+3. [Realizamos un resample para generar las muestra y crear una data con un timestamp periorico cada 1 min.](#resampledata)
 4. [Rellenamos los valores faltantes de la tabla:](#missingvalues)
     * Para Variables categóricos realizamos un .fillna(method='ffill') donde propagamos los valores con el mismo valor
     * Para Variables continuas, realizamos una interpolación de valores
-5. [Realizamos un merge de las variables de cada mural con sus valores de la central de frio](#mergedata)
+5. [Realizamos un merge de las variables de cada mural con sus valores de la central de frío](#mergedata)
 6. [Extraemos por medio de un merge, ventanas de 10 días de telemetría antes de las alarmas críticas filtradas en el primer paso](#mergealarmas)
 7. [Generamos 2 columnas nuevas:](#lables2)
     * (Clycle_number) Una Columna para identificar los ciclos (1 para cada alarma crítica)
@@ -28,16 +28,17 @@ Procedemos a generar un dataset el cual será utilizado para el entre
 ## 1. Utilizamos la base de datos de las alarmas y filtramos de la siguiente manera:<a name="filtradoalarma"></a>
 
 <img src=".././Images/df_alarm.png" width="100%"><br/>
-* filtramos las alarmas que habían sido generadas por murales de carne y murales de pescados ambos con controladores RX600.  
+
+* Filtramos las alarmas que habían sido generadas por murales de carne y murales de pescados ambos con controladores RX600.  
 
 | Field name|DESCRIPTION|  
 | ----------|-------|
 | Example      |Alarma Alta Temperatura en servicio  |
 
-*filtramos el comienzo de la Alarma con la descripción Begin que cumpla la siguiente condición:    
-    * No pueden haber estado inhabilitadas antes de su activación. sino la misma debería ser considerada como mantenimiento preventivo.
+* Filtramos el comienzo de la Alarma con la descripción Begin que cumpla la siguiente condición:    
+    * No pueden haber estado inhabilitadas antes de su activación. sino la misma debería ser considerada como mantenimiento preventivo.
 
-**Alarma Critica**
+**Alarma Crítico**
 |   |TimeStand|TYPE|    
 | ----------|-------|-------|
 | Example      |1|EnabledNotif |
@@ -46,7 +47,7 @@ Procedemos a generar un dataset el cual será utilizado para el entre
 | Example      |4|Being  |
 | Example      |5|End  |
 
-**Alarma Desabilitada antes de su inicio**
+**Alarma Deshabilitada antes de su inicio**
 |   |TimeStand|TYPE|    
 | ----------|-------|-------|
 | Example      |1|EnabledNotif |
@@ -67,7 +68,7 @@ elif (df_Alarms.loc[i,'ALTA_TEMPERATURA']) =='Begin' and  (df_Alarms.loc[i-1,'AL
 else:
     df_Alarms.at[i,'new'] = 'False'     
 ``` 
-* filtramos las alarmas que se hayan activado dentro de una misma locación en un rango menor a 10 días, evitando considerar alarmas críticas que no hayan podido ser reparadas.
+* Filtramos las alarmas que se hayan activado dentro de una misma locación en un rango menor a 10 días, evitando considerar alarmas críticas que no hayan podido ser reparadas.
 
 ```
     for i, row  in df_Alarms.iterrows():
@@ -83,7 +84,7 @@ else:
             df_Alarms.at[i,'new2'] = 'True'  
 ``` 
 
-## 2. Eliminamos outliers de la telemetría en la tabla de muebles frigoríficos y central de frio:<a name="outliers2"></a>
+## 2. Eliminamos outliers de la telemetría en la tabla de muebles frigoríficos y central de frío:<a name="outliers2"></a>
 ```
 #df_central = df_central.loc[(df_central['TAG_CONV_SONDA_ASP'] >-500) ]
 #df_central = df_central.loc[(df_central['TAG_CONV_SONDA_COND'] >-500) ]
@@ -102,14 +103,15 @@ df_central = df_central.loc[(df_central['TAG_SONDA_TEMP_SUBENF'] >-10) ]
 ```
 
 <a name="resampledata"></a>
-## 3. Realizamos un resample para generar las muestra y crear una data con un timestamp peridorico cada 1 min.
+
+## 3. Realizamos un resample para generar las muestra y crear una data con un timestamp periorico cada 1 min.
 
 Para realizar el resample de data se tiene que agrupar por elementos por que cada uno comienza y termina en fechas distintas
 
 ```
 df_loop =(df_loop.set_index('TS').groupby('ELEMENT').resample('1min').mean().drop(['ELEMENT'], 1).reset_index())
 ```
-Esta linea es parte de una funcion que genera nuevas colunmas:
+Esta línea es parte de una función que genera nuevas colunmas:
 * 2 columnas nuevas de sumatoria tanto para petición de frío como para desescarche
 * 4 columnas nuevas de delta de tiempo o cuánto tiempo ha transcurrido desde la última petición de frío o desescarche
 
@@ -181,7 +183,7 @@ df = Interpolate_data(data_frame)
 
 <a name="mergedata"></a>
 
-## 5. Realizamos un merge de las variables de cada mural con sus valores de la central de frio
+## 5. Realizamos un merge de las variables de cada mural con sus valores de la central de frío
 
 ```
 def merge_variables_central(data):
@@ -228,7 +230,7 @@ df = merging_data(data_telemetria, data_alarmas )
 ```
 
 
-## 7.Para Generar columna de ciclos unicos para cada alarma se realiza de la siguente forma:<a name="lables2"></a>
+## 7.Para Generar columna de ciclos únicos para cada alarma se realiza de la siguente forma:<a name="lables2"></a>
 
 ```
 def label_Cycle(data):

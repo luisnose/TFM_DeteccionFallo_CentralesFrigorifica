@@ -1,11 +1,10 @@
-TFM: Detecccion de fallos en muebles frigorificos
-
+TFM: Deteccción de fallos en muebles frigoríficos
 
 
 
 ## 3.  Comparación de Modelos <a name="Comparación_de_Modelos"></a>
 
-Para la compraracion de modelos se utlizo la libreria **sklearn** y **xgboost** y se compararon los siguentes algoritmos:
+Para la compraración de modelos se utilizaron las librerias **sklearn** y **xgboost** y se compararon los siguentes algoritmos:
 *Regresión logística
 *SVM (Support vector machine)
 *Random Forest 
@@ -18,7 +17,7 @@ El notebook realiza los siguentes pasos:
 3. [Generamos la etiqueta de fallo y normales ](#resampledata)
 4. [Estandarización de los valores de train y test](#scalevalues)
 5. [Entrenamiento de los modelos](#Entrenarmodelo)
-6. [Evaluacion de modelos](#Evaluarmodelo)
+6. [Evaluación de modelos](#Evaluarmodelo)
 
 
 
@@ -27,9 +26,9 @@ El notebook realiza los siguentes pasos:
 
 ## 1. Generar valores de ventanas<a name="ventanas"></a>
 
-* HoraIni =  Tiempo de antelacion al fallo
+* HoraIni =  Tiempo de antelación al fallo
 * HoraFin = Fin de la ventana de fallo
-* IniNor = tiempo de incio de ventana de estado normal   *Se toman dias antes del fallo para evitar tomar valores en estado de fallo
+* IniNor = Tiempo de incio de ventana de estado normal   *Se toman días antes del fallo para evitar tomar valores en estado de fallo
 * Window = Minutos de tamaño del vector de tiempo
 * Steps = Cantidad de muestras dentro del vector de tiempo
 
@@ -83,11 +82,11 @@ df = To_TimeSeries(Data_frame)
 ```
 
 
-## 3. Generamos la etiqueta de fallo y normales<a name="resampledata"></a> ]
+## 3. Generamos la etiqueta de fallo y normales<a name="resampledata"></a> 
 
 Se etiqueta como uno (1) las muestras de fallo y como cero (0) las muestras en estado normal
 
-indicando que los valores anteriores a la hora fin sean etiquetados como uno y los valores posteriores como cero
+Indicando que los valores anteriores a la hora fin sean etiquetados como uno y los valores posteriores como cero
 
 ```
 df['label1'] = np.where(df['RUL'] <= HoraFin, 1, 0 )
@@ -144,7 +143,7 @@ print("Accuracy: %.2f%%" % (accuracy * 100.0))
 joblib.dump(model, './Models/I{}h_F{}h_W{}m_S5m_XGB_model.pkl'.format(HoraIni, HoraFin+1,Window))
 ```
 
-## 6. Evaluacion de modelos <a name="Evaluarmodelo"></a> 
+## 6. Evaluación de modelos <a name="Evaluarmodelo"></a> 
 
 Se cargan los pesos de cada modelo y evaluarlo con ciclos de alarmas con los cuales no haya sido entrenado
 
