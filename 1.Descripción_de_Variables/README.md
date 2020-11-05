@@ -21,7 +21,7 @@ credentials = service_account.Credentials.from_service_account_file(
 client = bigquery.Client(credentials=credentials, project=credentials.project_id,)
 ```
 "Credentials.json"
-[*Este archibo es unico y debe crearse por cada cuenta](https://cloud.google.com/docs/authentication/getting-started) 
+[*Este archivo es unico y debe crearse por cada cuenta](https://cloud.google.com/docs/authentication/getting-started) 
 
 ```
 query = """
