@@ -1,5 +1,4 @@
-TFM: Detecccion de fallos en muebles frigorificos
-
+TFM: Deteccción de fallos en muebles frigoríficos
 
 
 
@@ -109,8 +108,8 @@ Identificador de tiendas, altitud, longitud y altura con respecto al mar
 
 
 ## Authors
-- Luis Araujo
 - Miguel Ángel Aguilar
+- Luis Araujo
 - Rocío Cort
 - Victor Malvar
 
