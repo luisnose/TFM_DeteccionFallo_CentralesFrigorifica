@@ -1,5 +1,4 @@
-TFM: Detecccion de fallos en muebles frigorificos
-
+TFM: Deteccción de fallos en muebles frigoríficos
 
 
 
